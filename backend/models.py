@@ -18,7 +18,7 @@ class Job(db.Model):
     client_id = db.Column(db.Integer, db.ForeignKey('users.user_id', ondelete="CASCADE"), nullable=False)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
-    budget = db.Column(db.Numeric(10, 2), nullabe=False)
+    budget = db.Column(db.Numeric(10, 2), nullable=False)
     image_path = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 

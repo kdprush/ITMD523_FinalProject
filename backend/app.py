@@ -1,11 +1,13 @@
 # app.py
 import os
 from dotenv import load_dotenv
-from . import db, create_app
-from routes.users import users_bp
-from routes.jobs import jobs_bp
-from routes.applications import applications_bp
-from routes.messages import messages_bp
+from . import db, create_app # Import from backend/__init__.py
+
+# Import blueprints using relative imports
+from .routes.users import users_bp
+from .routes.jobs import jobs_bp
+from .routes.applications import applications_bp
+from .routes.messages import messages_bp
 
  # Load environment variables from .env file
 load_dotenv()

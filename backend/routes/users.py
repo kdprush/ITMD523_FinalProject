@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from werkzeug.security import generate_password_hash, check_password_hash
 from ..models import User
 from .. import db
 
@@ -7,19 +8,37 @@ users_bp = Blueprint('users', __name__)
 @users_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    new_user = User(
-        name=data['name'],
-        email=data['email'],
-        password=data['password'],  # Use hashed passwords in production
-        user_type=data['user_type']
-    )
-    db.session.add(new_user)
-    db.session.commit()
-    return jsonify({"message": "User registered successfully"}), 201
+
+    # Validate incoming data
+    if not all(key in data for key in ['name', 'email', 'password', 'user_type']):
+        return jsonify({"error": "Missing required fields"}), 400
+    
+    # Check if user already exists
+    if User.query.filter_by(email=data['email']).first():
+        return jsonify({"error": "User with this email already exists"}), 409
+    
+    try:
+        new_user = User(
+            name=data['name'],
+            email=data['email'],
+            password=data['password'],  # Use hashed passwords in production
+            user_type=data['user_type']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"message": "User registered successfully"}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
 @users_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
+
+    # Validate incoming data
+    if not all(key in data for key in ['email', 'password']):
+        return jsonify({"error": "Missing email or password"}), 400
+    
     user = User.query.filter_by(email=data['email'], password=data['password']).first()
     if user:
         return jsonify({"message": "Login successful"}), 200
@@ -33,7 +52,14 @@ def update_profile(user_id):
         return jsonify({"error": "User not found"}), 404
 
     data = request.get_json()
-    user.name = data.get('name', user.name)
-    user.password = data.get('password', user.password)  # Again, hash passwords in production
-    db.session.commit()
-    return jsonify({"message": "Profile updated"}), 200
+    try:
+        if 'name' in data:
+            user.name = data['name']
+        if 'password' in data:
+            user.password = generate_password_hash(data['password']) # Hash the new password
+
+        db.session.commit()
+        return jsonify({"message": "Profile updated"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"erro": f"An error occurred: {str(e)}"}), 500

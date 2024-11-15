@@ -1,7 +1,7 @@
 # app.py
 import os
 from dotenv import load_dotenv
-from __init__ import db, create_app
+from . import db, create_app
 from routes.users import users_bp
 from routes.jobs import jobs_bp
 from routes.applications import applications_bp

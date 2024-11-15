@@ -1,10 +1,10 @@
 import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate # Import Flask-Migrate
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
-migrate = Migrate() # Initialize Migrate
+migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)

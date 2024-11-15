@@ -16,10 +16,13 @@ load_dotenv()
 app = create_app()
 
 # Register blueprints
-app.register_blueprint(users_bp)
-app.register_blueprint(jobs_bp)
-app.register_blueprint(applications_bp)
-app.register_blueprint(messages_bp)
+try:
+    app.register_blueprint(users_bp)
+    app.register_blueprint(jobs_bp)
+    app.register_blueprint(applications_bp)
+    app.register_blueprint(messages_bp)
+except ValueError as e:
+    print(f"Blueprint registration error: {e}")
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

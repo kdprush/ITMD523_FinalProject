@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -13,10 +12,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Check if the database URI is set
-    if not app.config['SQLALCHEMY_DATABASE_URI']:
-        raise ValueError("SQLALCHEMY_DATABASE_URI is not set in the environment")
-    
+   
     db.init_app(app)
     migrate.init_app(app, db)
 

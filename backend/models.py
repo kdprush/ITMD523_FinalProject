@@ -11,7 +11,7 @@ class User(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     updated_at = db.Column(db.DateTime, default=datetime.now(timezone.utc), onupdate=datetime.now(timezone.utc))
 
-    jobs = db.relationship('Job' backref='client', lazy=True)
+    jobs = db.relationship('Job', backref='client', lazy=True)
 class Job(db.Model):
     __tablename__ = 'jobs'
     job_id = db.Column(db.Integer, primary_key=True)

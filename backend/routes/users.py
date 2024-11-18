@@ -30,7 +30,7 @@ def register():
         )
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({"message": "User registered successfully", "user_id": new_user.id}), 201
+        return jsonify({"message": "User registered successfully", "user_id": new_user.user_id}), 201
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500

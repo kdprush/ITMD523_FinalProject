@@ -10,8 +10,12 @@ def register():
     data = request.get_json()
 
     # Validate incoming data
+    required_fields = ['name', 'email','password','user_type']
+    missing_fields = [key for key in required_fields if key not in data]
+    if missing_fields:
+        return jsonify({"error": "Missing required fields"})
     if not all(key in data for key in ['name', 'email', 'password', 'user_type']):
-        return jsonify({"error": "Missing required fields"}), 400
+        return jsonify({"error": "Missing required fields", "missing": missing_fields}), 400
     
     # Check if user already exists
     if User.query.filter_by(email=data['email']).first():
@@ -21,12 +25,12 @@ def register():
         new_user = User(
             name=data['name'],
             email=data['email'],
-            password=data['password'],  # Use hashed passwords in production
+            password=generate_password_hash(data['password']),  # Use hashed passwords in production
             user_type=data['user_type']
         )
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({"message": "User registered successfully"}), 201
+        return jsonify({"message": "User registered successfully", "user_id": new_user.id}), 201
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500

@@ -11,9 +11,12 @@ load_dotenv()
 # Initialize the app using create_app() from _init_.py
 app = create_app()
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5001)
-
 @app.route('/')
 def home():
     return "Welcome to the Freelancer Marketplace API"
+
+if __name__ == '__main__':
+    with app.app_context():    
+        print(app.url_map)
+    app.run(debug=True, port=5000)
+

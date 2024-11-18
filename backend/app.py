@@ -15,6 +15,11 @@ app = create_app()
 def home():
     return "Welcome to the Freelancer Marketplace API"
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "pong"}), 200
+
+
 if __name__ == '__main__':
     with app.app_context():    
         print(app.url_map)

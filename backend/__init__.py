@@ -22,7 +22,7 @@ def create_app():
     from .routes.applications import applications_bp
     from .routes.messages import messages_bp
 
-    app.register_blueprint(users_bp)
+    app.register_blueprint(users_bp, url_prefix='/users') # Add a prefix if needed
     app.register_blueprint(jobs_bp)
     app.register_blueprint(applications_bp)
     app.register_blueprint(messages_bp)

@@ -13,9 +13,7 @@ def register():
     required_fields = ['name', 'email','password','user_type']
     missing_fields = [key for key in required_fields if key not in data]
     if missing_fields:
-        return jsonify({"error": "Missing required fields"})
-    if not all(key in data for key in ['name', 'email', 'password', 'user_type']):
-        return jsonify({"error": "Missing required fields", "missing": missing_fields}), 400
+        return jsonify({"error": "Missing required fields","missing": missing_fields}), 400
     
     # Check if user already exists
     if User.query.filter_by(email=data['email']).first():
@@ -43,8 +41,8 @@ def login():
     if not all(key in data for key in ['email', 'password']):
         return jsonify({"error": "Missing email or password"}), 400
     
-    user = User.query.filter_by(email=data['email'], password=data['password']).first()
-    if user:
+    user = User.query.filter_by(email=data['email']).first()
+    if user and check_password_hash(user.password, data['password']):
         return jsonify({"message": "Login successful"}), 200
     else:
         return jsonify({"error": "Invalid credentials"}), 401

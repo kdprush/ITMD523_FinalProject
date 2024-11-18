@@ -2,6 +2,7 @@
 import os
 from dotenv import load_dotenv
 from . import create_app # Import from backend/__init__.py
+from flask import jsonify
 
 
 
@@ -21,7 +22,7 @@ def ping():
 
 
 if __name__ == '__main__':
-    with app.app_context():    
-        print(app.url_map)
+    print(app.url_map)  # Debugging: Print all routes
     app.run(debug=True, port=5000)
+
 

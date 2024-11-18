@@ -16,9 +16,9 @@ app = create_app()
 def home():
     return "Welcome to the Freelancer Marketplace API"
 
-@app.route('/ping', methods=['GET'])
-def ping():
-    return jsonify({"message": "pong"}), 200
+@app.route('/test', methods=['GET'])
+def test():
+    return "Test endpoint works!", 200
 
 
 if __name__ == '__main__':

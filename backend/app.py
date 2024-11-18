@@ -20,6 +20,9 @@ def home():
 def test():
     return "Test endpoint works!", 200
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "pong"}), 200
 
 if __name__ == '__main__':
     print(app.url_map)  # Debugging: Print all routes

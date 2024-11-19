@@ -8,6 +8,9 @@ migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
+
+    print("Database URI:", os.getenv("SQLALCHEMY_DATABASE_URI"))
+
     
     # Use environment variable for the database URI
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")

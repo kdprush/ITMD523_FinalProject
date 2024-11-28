@@ -1,46 +1,42 @@
-// JavaScript for handling form submissions
+// auth.js: Handles Login and Signup
 
-// Handle Login Form Submission
+// Login Form Submission
 document.getElementById("loginForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://localhost:5000/api/login", {
+    const response = await fetch("http://127.0.0.1:5000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
+        body: JSON.stringify({ email, password }),
     });
 
-    const data = await response.json();
     if (response.ok) {
+        const data = await response.json();
         alert("Login successful!");
-        // Redirect to dashboard
-        window.location.href = "dashboard-client.html"; // Adjust based on role
+        window.location.href = data.role === "client" ? "dashboard-client.html" : "dashboard-freelancer.html";
     } else {
-        alert(`Login failed: ${data.message}`);
+        alert("Login failed. Please check your credentials.");
     }
 });
 
-// Handle Signup Form Submission
+// Signup Form Submission
 document.getElementById("signupForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-
     const name = document.getElementById("name").value;
     const email = document.getElementById("emailSignup").value;
     const password = document.getElementById("passwordSignup").value;
 
-    const response = await fetch("http://localhost:5000/api/signup", {
+    const response = await fetch("http://127.0.0.1:5000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
+        body: JSON.stringify({ name, email, password }),
     });
 
-    const data = await response.json();
     if (response.ok) {
         alert("Signup successful! Please log in.");
     } else {
-        alert(`Signup failed: ${data.message}`);
+        alert("Signup failed. Please try again.");
     }
 });

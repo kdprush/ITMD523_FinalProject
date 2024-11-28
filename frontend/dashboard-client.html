@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome, Client!</h1>
+    </header>
+
+    <main>
+        <section id="job-posting">
+            <h2>Post a New Job</h2>
+            <form id="jobPostForm">
+                <input type="text" id="jobTitle" placeholder="Job Title" required>
+                <textarea id="jobDescription" placeholder="Job Description" required></textarea>
+                <input type="number" id="jobBudget" placeholder="Budget" required>
+                <button type="submit">Post Job</button>
+            </form>
+        </section>
+
+        <section id="job-listings">
+            <h2>Your Job Listings</h2>
+            <div id="job-list">
+                <!-- Jobs will load here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Freelancer Marketplace</p>
+    </footer>
+
+    <script src="assets/js/dashboard-client.js"></script>
+</body>
+</html>

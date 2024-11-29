@@ -12,31 +12,34 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
         body: JSON.stringify({ email, password }),
     });
 
+    const data = await response.json();
     if (response.ok) {
-        const data = await response.json();
         alert("Login successful!");
         window.location.href = data.role === "client" ? "dashboard-client.html" : "dashboard-freelancer.html";
     } else {
-        alert("Login failed. Please check your credentials.");
+        alert(data.message);
     }
 });
 
 // Signup Form Submission
 document.getElementById("signupForm").addEventListener("submit", async (event) => {
     event.preventDefault();
+
     const name = document.getElementById("name").value;
     const email = document.getElementById("emailSignup").value;
     const password = document.getElementById("passwordSignup").value;
+    const role = document.querySelector('input[name="role"]:checked').value;
 
     const response = await fetch("http://127.0.0.1:5000/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, role }),
     });
 
     if (response.ok) {
-        alert("Signup successful! Please log in.");
+        alert("Sign-up successful! Please log in.");
     } else {
-        alert("Signup failed. Please try again.");
+        const error = await response.json();
+        alert(error.message);
     }
 });

@@ -1,16 +1,21 @@
 # app.py
 import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from dotenv import load_dotenv
 from . import create_app # Import from backend/__init__.py
 from flask import jsonify
-
+from routes.users import users_bp
 
 
  # Load environment variables from .env file
 load_dotenv()
 
+
+
 # Initialize the app using create_app() from _init_.py
 app = create_app()
+app.register_blueprint(users_bp)
 
 @app.route('/')
 def home():

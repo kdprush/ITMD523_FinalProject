@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from ..models import User
 from .. import db
 
-users_bp = Blueprint('users', __name__)
+users_bp = Blueprint('users', __name__, url_prefix='/api')
 
 @users_bp.route('/register', methods=['POST'])
 def register():

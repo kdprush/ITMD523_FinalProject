@@ -1,1 +1,3 @@
-DATABASE_URI='mysql+pymysql://admin:Freelancer523!@freelancer-marketplace.c9yu24uw2aej.us-east-2.rds.amazonaws.com:3306/freelancer-marketplace'
+import os
+
+DATABASE_URI = f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"

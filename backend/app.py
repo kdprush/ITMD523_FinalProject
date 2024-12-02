@@ -1,21 +1,16 @@
-# app.py
 import os
 import sys
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from dotenv import load_dotenv
-from . import create_app # Import from backend/__init__.py
+from backend import create_app  # Import from backend/__init__.py
+from backend.routes.users import users_bp
 from flask import jsonify
-from routes.users import users_bp
 
+# Load environment variables from .env file
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
 
- # Load environment variables from .env file
-load_dotenv()
-
-
-
-# Initialize the app using create_app() from _init_.py
+# Initialize the app using create_app() from __init__.py
 app = create_app()
-app.register_blueprint(users_bp)
+app.register_blueprint(users_bp, url_prefix='/api/users')  # Optional URL prefix
 
 @app.route('/')
 def home():
@@ -31,6 +26,6 @@ def ping():
 
 if __name__ == '__main__':
     print(app.url_map)  # Debugging: Print all routes
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)
 
 

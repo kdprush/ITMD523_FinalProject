@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
-from ..models import Job
-from .. import db
+from backend.models import Job
+from backend import db
 
 jobs_bp = Blueprint('jobs', __name__)
 

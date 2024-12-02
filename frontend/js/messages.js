@@ -1,5 +1,3 @@
-// messages.js: Handles Messaging Functionality
-
 // Load Messages
 async function loadMessages() {
     const response = await fetch("http://127.0.0.1:5000/api/messages", {
@@ -8,18 +6,19 @@ async function loadMessages() {
     });
 
     const messages = await response.json();
-    const messageList = document.getElementById("message-list");
+    const messageList = document.getElementById("messageList");
 
+    messageList.innerHTML = ""; // Clear the list
     messages.forEach((message) => {
         const messageItem = document.createElement("div");
         messageItem.innerHTML = `
-            <p><strong>${message.sender}: </strong>${message.content}</p>
+            <p><strong>${message.sender}:</strong> ${message.content}</p>
         `;
         messageList.appendChild(messageItem);
     });
 }
 
-// Send Message
+// Send a Message
 document.getElementById("sendMessage").addEventListener("click", async () => {
     const messageContent = document.getElementById("messageInput").value;
 
@@ -30,13 +29,12 @@ document.getElementById("sendMessage").addEventListener("click", async () => {
     });
 
     if (response.ok) {
-        alert("Message sent!");
-        document.getElementById("messageInput").value = ""; // Clear input field
-        loadMessages(); // Refresh messages
+        loadMessages(); // Reload messages
+        document.getElementById("messageInput").value = ""; // Clear input
     } else {
-        alert("Failed to send message. Please try again.");
+        alert("Failed to send message.");
     }
 });
 
-// Load Messages on Page Load
+// Load messages when the page loads
 document.addEventListener("DOMContentLoaded", loadMessages);

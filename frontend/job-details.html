@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelancer Dashboard</title>
+    <title>Job Details</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-        <h1>Freelancer Dashboard</h1>
+        <h1>Job Details</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -19,16 +19,16 @@
         </nav>
     </header>
     <main>
-        <section id="browseJobs">
-            <h2>Available Jobs</h2>
-            <div id="jobList">
-                <!-- Jobs will be dynamically loaded here -->
-            </div>
+        <section id="jobDetails">
+            <h2 id="jobTitle">Job Title</h2>
+            <p id="jobDescription">Description...</p>
+            <p id="jobBudget">Budget: $0</p>
+            <button id="applyButton">Apply Now</button>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 Freelancer Marketplace</p>
     </footer>
-    <script src="js/dashboard-freelancer.js"></script>
+    <script src="js/job-details.js"></script>
 </body>
 </html>

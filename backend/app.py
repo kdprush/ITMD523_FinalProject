@@ -5,7 +5,7 @@ from backend.routes.applications import applications_bp
 app = Flask(__name__)
 
 # Register the applications blueprint
-app.register_blueprint(applications_bp)
+app.register_blueprint(applications_bp, url_prefix="/")
 
 # Database connection
 db = mysql.connector.connect(

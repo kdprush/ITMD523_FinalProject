@@ -1,11 +1,11 @@
 from flask import jsonify, request
-from backend import create_app, db  # Import create_app and db
-from backend.routes.applications import applications_bp  # Import blueprints
+from backend import create_app, db  # Import create_app and db from backend
+from routes.applications import applications_bp
 
 # Initialize the Flask app
 app = create_app()
 
-# Register blueprints
+# Register the applications blueprint
 app.register_blueprint(applications_bp, url_prefix="/applications")
 
 # Home route
@@ -75,5 +75,5 @@ def update_job(job_id):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Create tables if they don’t exist
+        db.create_all()  # Create all tables if they don't exist
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -40,7 +40,7 @@ def post_job():
 
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO Jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
+            "INSERT INTO jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
             (data['client_id'], data['title'], data['description'], data['budget'], data.get('image_path'))
         )
         db.commit()
@@ -57,7 +57,7 @@ def update_job(job_id):
             return jsonify({"error": "No data provided"}), 400
 
         cursor = db.cursor()
-        query = "UPDATE Jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
+        query = "UPDATE jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
         cursor.execute(query, (
             data.get('title'), 
             data.get('description'), 

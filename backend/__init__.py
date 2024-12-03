@@ -1,24 +1,20 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
-import os
 
 db = SQLAlchemy()
 
 def create_app():
-    load_dotenv()  # Load environment variables from the .env file
-
     app = Flask(__name__)
 
-    # Set Flask configurations from .env variables
-    app.config['SQLALCHEMY_DATABASE_URI'] = (
-        f"mysql+pymysql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}"
-        f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
-    )
+    # Directly set Flask configurations with no placeholders
+    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:MySQL@1234@localhost:3306/freelancer_marketplace"
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+    app.config['SECRET_KEY'] = "your_secret_key"
 
     db.init_app(app)
 
-    # Register blueprints or routes here, if any
+    # Register blueprints or routes here
+    from backend.routes.applications import applications_bp
+    app.register_blueprint(applications_bp, url_prefix="/applications")
+
     return app

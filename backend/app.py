@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 import mysql.connector
-from backend.routes.applications import applications_bp
+from routes.applications import applications_bp
+
 
 app = Flask(__name__)
 

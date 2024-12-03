@@ -4,6 +4,8 @@ from backend.routes.applications import applications_bp  # Import blueprints
 
 # Initialize the Flask app
 app = create_app()
+with app.app_context():
+    print(app.url_map)
 
 # Register blueprints
 app.register_blueprint(applications_bp, name='applications_bp', url_prefix="/applications")

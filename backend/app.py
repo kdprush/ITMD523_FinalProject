@@ -57,7 +57,7 @@ def update_job(job_id):
             return jsonify({"error": "No data provided"}), 400
 
         cursor = db.cursor()
-        query = "UPDATE Jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
+        query = "UPDATE jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
         cursor.execute(query, (
             data.get('title'), 
             data.get('description'), 

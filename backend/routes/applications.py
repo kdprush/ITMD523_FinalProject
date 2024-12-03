@@ -3,9 +3,9 @@ from backend.models import Application, Job, User
 from backend import db
 
 # Provide a unique name to avoid conflicts
-applications_bp = Blueprint('applications_bp_unique', __name__)
+applications_bp = Blueprint('applications_bp_unique_v2', __name__)
 
-@applications_bp.route('/', methods=['POST'])
+@applications_bp.route('/api/jobs', methods=['POST'])
 def submit_application():
     try:
         data = request.get_json()
@@ -20,7 +20,7 @@ def submit_application():
 
         # Validate job_id and freelancer_id
         job = Job.query.get(data['job_id'])
-        freelancer = User.query.get(data['freelancer_id'])
+        f0reelancer = User.query.get(data['freelancer_id'])
         if not job:
             return jsonify({"error": "Invalid job_id"}), 404
         if not freelancer or freelancer.user_type != 'freelancer':

@@ -4,7 +4,7 @@ from backend import db
 
 jobs_bp = Blueprint('jobs', __name__)
 
-@jobs_bp.route('/jobs', methods=['POST'])
+@jobs_bp.route('/api/jobs', methods=['POST'])
 def post_job():
     try:
         data = request.get_json()

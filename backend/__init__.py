@@ -16,8 +16,5 @@ def create_app():
 
     db.init_app(app)
 
-    # Register blueprints or routes here
-    from backend.routes.applications import applications_bp
-    app.register_blueprint(applications_bp, url_prefix="/applications")
 
     return app

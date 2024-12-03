@@ -1,24 +1,12 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify, request
+from backend import create_app, db  # Import create_app and db
+from backend.routes.applications import applications_bp  # Import blueprints
 
-db = SQLAlchemy()
+# Initialize the Flask app
+app = create_app()
 
-def create_app():
-    app = Flask(__name__)
-
-    # Directly set Flask configurations
-    app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root:MySQL@1234@localhost:3306/freelancer_marketplace"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = "your_secret_key"
-
-    db.init_app(app)
-
-    # Register blueprints or routes here
-    from backend.routes.applications import applications_bp
-    app.register_blueprint(applications_bp, url_prefix="/applications")
-
-    return app
-
+# Register blueprints
+app.register_blueprint(applications_bp, url_prefix="/applications")
 
 # Home route
 @app.route('/')
@@ -87,5 +75,5 @@ def update_job(job_id):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Create all tables if they don't exist
+        db.create_all()  # Create tables if they don’t exist
     app.run(host='0.0.0.0', port=5000, debug=True)

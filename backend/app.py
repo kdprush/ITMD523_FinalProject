@@ -1,31 +1,26 @@
-import os
-import sys
-from dotenv import load_dotenv
-from backend import create_app  # Import from backend/__init__.py
-from backend.routes.users import users_bp
-from flask import jsonify
+from flask import Flask, jsonify, request
+import mysql.connector
 
-# Load environment variables from .env file
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '..', '.env'))
+app = Flask(__name__)
 
-# Initialize the app using create_app() from __init__.py
-app = create_app()
-app.register_blueprint(users_bp, url_prefix='/api/users')  # Optional URL prefix
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="MySQL@1234",
+    database="freelancer_marketplace"
+)
 
 @app.route('/')
 def home():
-    return "Welcome to the Freelancer Marketplace API"
+    return "Welcome to the Freelancer Marketplace!"
 
-@app.route('/test', methods=['GET'])
-def test():
-    return "Test endpoint works!", 200
 
-@app.route('/ping', methods=['GET'])
-def ping():
-    return jsonify({"message": "pong"}), 200
+@app.route('/jobs', methods=['GET'])
+def get_jobs():
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Jobs;")
+    jobs = cursor.fetchall()
+    return jsonify(jobs)
 
 if __name__ == '__main__':
-    print(app.url_map)  # Debugging: Print all routes
-    app.run(debug=True, host='0.0.0.0', port=5000)
-
-
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -19,7 +19,7 @@ def home():
 def get_jobs():
     try:
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM Jobs;")
+        cursor.execute("SELECT * FROM jobs;")
         jobs = cursor.fetchall()
         return jsonify(jobs), 200
     except Exception as e:
@@ -40,7 +40,7 @@ def post_job():
 
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO Jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
+            "INSERT INTO jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
             (data['client_id'], data['title'], data['description'], data['budget'], data.get('image_path'))
         )
         db.commit()

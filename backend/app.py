@@ -2,10 +2,12 @@ from flask import Flask, jsonify, request
 import mysql.connector
 from backend.routes.applications import applications_bp
 
-app.register_blueprint(applications_bp)
-
 app = Flask(__name__)
 
+# Register the applications blueprint
+app.register_blueprint(applications_bp)
+
+# Database connection
 db = mysql.connector.connect(
     host="localhost",
     user="root",

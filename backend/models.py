@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from . import db
+from backend import db
 
 class User(db.Model):
     __tablename__ = 'users'

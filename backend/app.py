@@ -1,5 +1,5 @@
 from flask import jsonify, request
-from backend import create_app, db  # Import create_app and db
+from . import create_app, db  # Import create_app and db
 from backend.routes.applications import applications_bp  # Import blueprints
 
 # Initialize the Flask app

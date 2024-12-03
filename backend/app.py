@@ -19,7 +19,7 @@ def home():
 def get_jobs():
     try:
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM Jobs;")
+        cursor.execute("SELECT * FROM jobs;")
         jobs = cursor.fetchall()
         return jsonify(jobs), 200
     except Exception as e:

@@ -8,7 +8,7 @@ with app.app_context():
     print(app.url_map)
 
 # Register blueprints
-app.register_blueprint(applications_bp, name='applications_bp', url_prefix="/")
+app.register_blueprint(applications_bp, url_prefix="/applications")
 
 # Home route
 @app.route('/')

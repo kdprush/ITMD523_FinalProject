@@ -19,7 +19,7 @@ def home():
 def get_jobs():
     try:
         cursor = db.cursor(dictionary=True)
-        cursor.execute("SELECT * FROM jobs;")
+        cursor.execute("SELECT * FROM Jobs;")
         jobs = cursor.fetchall()
         return jsonify(jobs), 200
     except Exception as e:
@@ -40,7 +40,7 @@ def post_job():
 
         cursor = db.cursor()
         cursor.execute(
-            "INSERT INTO jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
+            "INSERT INTO Jobs (client_id, title, description, budget, image_path) VALUES (%s, %s, %s, %s, %s)",
             (data['client_id'], data['title'], data['description'], data['budget'], data.get('image_path'))
         )
         db.commit()
@@ -57,7 +57,7 @@ def update_job(job_id):
             return jsonify({"error": "No data provided"}), 400
 
         cursor = db.cursor()
-        query = "UPDATE jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
+        query = "UPDATE Jobs SET title = %s, description = %s, budget = %s WHERE job_id = %s"
         cursor.execute(query, (
             data.get('title'), 
             data.get('description'), 

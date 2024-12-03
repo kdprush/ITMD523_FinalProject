@@ -4,7 +4,7 @@ from backend import db
 
 applications_bp = Blueprint('applications', __name__)
 
-@applications_bp.route('/applications', methods=['POST'])
+@applications_bp.route('/', methods=['POST'])
 def submit_application():
     try:
         data = request.get_json()

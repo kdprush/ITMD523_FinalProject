@@ -11,6 +11,9 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = "your_secret_key"
 
+    print(f"Database URI: {app.config['SQLALCHEMY_DATABASE_URI']}")
+
+
     db.init_app(app)
 
     # Register blueprints or routes here

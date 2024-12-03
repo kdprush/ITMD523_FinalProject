@@ -16,9 +16,9 @@ body {
 
 /* Header */
 header {
-    background-color: #007bff;
+    background-color: #219ebc;
     color: white;
-    padding: 1rem 0;
+    padding: 15px 0px 0px 0px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -69,12 +69,12 @@ form input:focus,
 form textarea:focus,
 form select:focus {
     outline: none;
-    border-color: #007bff;
+    border-color: #219ebc;
     box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
 }
 
 form button {
-    background-color: #007bff;
+    background-color: #219ebc;
     color: white;
     border: none;
     font-weight: bold;
@@ -83,7 +83,7 @@ form button {
 }
 
 form button:hover {
-    background-color: #0056b3;
+    background-color: #023047;
 }
 
 /* Section Styles */
@@ -93,7 +93,7 @@ section {
 
 section h2 {
     font-size: 1.5rem;
-    color: #007bff;
+    color: #219ebc;
     margin-bottom: 1rem;
     text-align: center;
 }
@@ -113,7 +113,7 @@ section h2 {
 }
 
 #jobList h3 {
-    color: #007bff;
+    color: #219ebc;
     margin-bottom: 0.5rem;
 }
 
@@ -129,13 +129,13 @@ button {
     border-radius: 4px;
     border: none;
     color: white;
-    background-color: #007bff;
+    background-color: #219ebc;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #023047;
     transform: translateY(-2px);
 }
 
@@ -144,7 +144,7 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
-    background-color: #007bff;
+    background-color: #219ebc;
     color: white;
 }
 
@@ -176,7 +176,7 @@ footer {
 
 /* Navigation Bar */
 nav {
-    background-color: #007bff;
+    background-color: #fb8500;
     padding: 1rem 0;
     text-align: center;
 }
@@ -203,11 +203,11 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #ffdd57; /* Yellow hover effect */
+    color: #023047; /* Yellow hover effect */
 }
 
 /* Active Page Indicator */
 nav ul li a.active {
-    color: #ffdd57; /* Highlight active page */
-    text-decoration: underline;
+    color: #023047; /* Highlight active page */
+    font-weight: bold;
 }

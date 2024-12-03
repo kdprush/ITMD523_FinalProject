@@ -2,7 +2,8 @@ from flask import Blueprint, request, jsonify
 from backend.models import Application, Job, User
 from backend import db
 
-applications_bp = Blueprint('applications_bp', __name__)
+# Provide a unique name to avoid conflicts
+applications_bp = Blueprint('applications_bp_unique', __name__)
 
 @applications_bp.route('/', methods=['POST'])
 def submit_application():
@@ -10,13 +11,13 @@ def submit_application():
         data = request.get_json()
         if not data:
             return jsonify({"error": "No data provided"}), 400
-        
+
         # Validate required fields
         required_fields = ['job_id', 'freelancer_id']
         missing_fields = [field for field in required_fields if field not in data]
         if missing_fields:
             return jsonify({"error": f"Missing required fields: {', '.join(missing_fields)}"}), 400
-        
+
         # Validate job_id and freelancer_id
         job = Job.query.get(data['job_id'])
         freelancer = User.query.get(data['freelancer_id'])
@@ -41,7 +42,6 @@ def submit_application():
 
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
-    
 
 @applications_bp.route('/jobs/<int:job_id>/applications', methods=['GET'])
 def get_job_applications(job_id):

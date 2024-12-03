@@ -1,14 +1,12 @@
-from flask import jsonify, request
-from . import create_app, db  # Import create_app and db
-from backend.routes.applications import applications_bp  # Import blueprints
+from flask import Flask, jsonify, request
+from backend import create_app, db  # Import create_app and db
 
 # Initialize the Flask app
 app = create_app()
+
+# Print the URL map for debugging purposes
 with app.app_context():
     print(app.url_map)
-
-# Register blueprints
-app.register_blueprint(applications_bp, url_prefix="/applications")
 
 # Home route
 @app.route('/')

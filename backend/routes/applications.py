@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from backend.models import Application, Job, User
 from backend import db
 
-applications_bp = Blueprint('applications', __name__)
+applications_bp = Blueprint('applications_bp', __name__)
 
 @applications_bp.route('/', methods=['POST'])
 def submit_application():

@@ -16,7 +16,7 @@ def post_job():
         missing_fields = [field for field in required_fields if field not in data]
         if missing_fields:
             return jsonify({"error": f"Missing required fields: {', '.join(missing_fields)}"}), 400
-        
+
         # Validate client_id
         client = User.query.get(data['client_id'])
         if not client or client.user_type != 'client':
@@ -40,7 +40,7 @@ def post_job():
         )
         db.session.add(new_job)
         db.session.commit()
-        return jsonify({"message": "Job posted successfully", "job_id": new_job.job_id}), 201
+        return jsonify({"message": "Job created successfully", "job_id": new_job.job_id}), 201
 
     except Exception as e:
         return jsonify({"error": f"An error occurred: {str(e)}"}), 500
